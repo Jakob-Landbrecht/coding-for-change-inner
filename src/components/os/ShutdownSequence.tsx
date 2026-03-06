@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import neverGiveUp from '../../assets/pictures/neverGiveUp.jpg';
-import eePic from '../../assets/pictures/ee.jpg';
+import eePic from '../../assets/pictures/neverGiveUp.jpg';
 export interface ShutdownSequenceProps {
     numShutdowns: number;
     setShutdown: React.Dispatch<React.SetStateAction<boolean>>;

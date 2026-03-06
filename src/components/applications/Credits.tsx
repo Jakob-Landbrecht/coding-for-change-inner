@@ -2,46 +2,10 @@ import React, { useEffect, useState } from 'react';
 import Window from '../os/Window';
 import { useInterval } from 'usehooks-ts';
 import { motion } from 'framer-motion';
+import { credits } from '../../data';
+import { siteConfig } from '../../data';
 
 export interface CreditsProps extends WindowAppProps {}
-
-const CREDITS = [
-    {
-        title: 'Engineering & Design',
-        rows: [['Henry Heffernan', 'All']],
-    },
-    {
-        title: 'Modeling & Texturing',
-        rows: [
-            ['Henry Heffernan', 'Texturing, Composition, & UV'],
-            ['Mickael Boitte', 'Computer Model'],
-            ['Sean Nicolas', 'Environment Models'],
-        ],
-    },
-    {
-        title: 'Sound Design',
-        rows: [
-            ['Henry Heffernan', 'Mixing, Composition, & Foley'],
-            ['Sound Cassette', 'Office Ambience'],
-            ['Windows 95 Startup Sound', 'Microsoft'],
-        ],
-    },
-    {
-        title: 'Special Thanks',
-        rows: [
-            ['Bruno Simon', 'SimonDev'],
-            ['Lorelei Kravinsky', 'Scott Bass'],
-            ['Trey Briccetti', 'Mom, Dad & Angela'],
-        ],
-    },
-    {
-        title: 'Inspiration',
-        rows: [
-            ['Bruno Simon', 'Jesse Zhou'],
-            ['Pink Yellow', 'Vivek Patel'],
-        ],
-    },
-];
 
 const Credits: React.FC<CreditsProps> = (props) => {
     const [currentSlide, setCurrentSlide] = useState(0);
@@ -50,12 +14,11 @@ const Credits: React.FC<CreditsProps> = (props) => {
     // every 5 seconds, move to the next slide
     useInterval(() => {
         setTime(time + 1);
-        // setCurrentSlide((currentSlide + 1) % CREDITS.length);
     }, 1000);
 
     useEffect(() => {
         if (time > 5) {
-            setCurrentSlide((currentSlide + 1) % CREDITS.length);
+            setCurrentSlide((currentSlide + 1) % credits.length);
             setTime(0);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -63,7 +26,7 @@ const Credits: React.FC<CreditsProps> = (props) => {
 
     const nextSlide = () => {
         setTime(0);
-        setCurrentSlide((currentSlide + 1) % CREDITS.length);
+        setCurrentSlide((currentSlide + 1) % credits.length);
     };
 
     return (
@@ -78,7 +41,7 @@ const Credits: React.FC<CreditsProps> = (props) => {
             closeWindow={props.onClose}
             onInteract={props.onInteract}
             minimizeWindow={props.onMinimize}
-            bottomLeftText={'© Copyright 2022 Henry Heffernan'}
+            bottomLeftText={siteConfig.copyrightText}
         >
             <div
                 onMouseDown={nextSlide}
@@ -86,7 +49,7 @@ const Credits: React.FC<CreditsProps> = (props) => {
                 style={styles.credits}
             >
                 <h2>Credits</h2>
-                <p>henryheffernan.com, 2022</p>
+                <p>Coding for Change, 2026</p>
                 <br />
                 <br />
                 <br />
@@ -95,13 +58,13 @@ const Credits: React.FC<CreditsProps> = (props) => {
                         <motion.div
                             animate={{ opacity: 1, y: -20 }}
                             transition={{ duration: 0.5 }}
-                            key={`section-${CREDITS[currentSlide].title}`}
+                            key={`section-${credits[currentSlide].title}`}
                             style={styles.section}
                         >
                             <h3 style={styles.sectionTitle}>
-                                {CREDITS[currentSlide].title}
+                                {credits[currentSlide].title}
                             </h3>
-                            {CREDITS[currentSlide].rows.map((row, i) => {
+                            {credits[currentSlide].rows.map((row, i) => {
                                 return (
                                     <div key={`row-${i}`} style={styles.row}>
                                         <p>{row[0]}</p>

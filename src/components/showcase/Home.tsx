@@ -1,44 +1,22 @@
 import React from 'react';
 import { Link } from '../general';
-
-import forhire from '../../assets/pictures/forHireGif.gif';
-import { useNavigate } from 'react-router';
+import { siteConfig } from '../../data';
 
 export interface HomeProps {}
 
 const Home: React.FC<HomeProps> = (props) => {
-    const navigate = useNavigate();
-
-    const goToContact = () => {
-        navigate('/contact');
-    };
-
     return (
         <div style={styles.page}>
             <div style={styles.header}>
-                <h1 style={styles.name}>Henry Heffernan</h1>
-                <h2>Software Engineer</h2>
+                <h1 style={styles.name}>{siteConfig.clubName}</h1>
+                <h2>{siteConfig.tagline}</h2>
             </div>
             <div style={styles.buttons}>
                 <Link containerStyle={styles.link} to="about" text="ABOUT" />
-                <Link
-                    containerStyle={styles.link}
-                    to="experience"
-                    text="EXPERIENCE"
-                />
-                <Link
-                    containerStyle={styles.link}
-                    to="projects"
-                    text="PROJECTS"
-                />
-                <Link
-                    containerStyle={styles.link}
-                    to="contact"
-                    text="CONTACT"
-                />
-            </div>
-            <div style={styles.forHireContainer} onMouseDown={goToContact}>
-                {/* <img src={forhire} alt="" /> */}
+                <Link containerStyle={styles.link} to="events" text="EVENTS" />
+                <Link containerStyle={styles.link} to="projects" text="PROJECTS" />
+                <Link containerStyle={styles.link} to="team" text="TEAM" />
+                <Link containerStyle={styles.link} to="join" text="JOIN" />
             </div>
         </div>
     );
@@ -59,7 +37,6 @@ const styles: StyleSheetCSS = {
         textAlign: 'center',
         marginBottom: 64,
         marginTop: 64,
-
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
@@ -67,22 +44,8 @@ const styles: StyleSheetCSS = {
     buttons: {
         justifyContent: 'space-between',
     },
-    image: {
-        width: 800,
-    },
     link: {
         padding: 16,
-    },
-    nowHiring: {
-        backgroundColor: 'red',
-        padding: 16,
-    },
-    forHireContainer: {
-        marginTop: 64,
-        width: '100%',
-        justifyContent: 'center',
-        alignItems: 'center',
-        cursor: 'pointer',
     },
     name: {
         fontSize: 72,
